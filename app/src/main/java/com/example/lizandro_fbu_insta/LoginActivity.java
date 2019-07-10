@@ -12,7 +12,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private TextView tvPassword;
     private TextView tvUserName;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         tvUserName = findViewById(R.id.tvUserName);
         tvPassword = findViewById(R.id.tvPassword);
         btnLogIn = findViewById(R.id.btnLogIn);
@@ -32,11 +32,12 @@ public class MainActivity extends AppCompatActivity {
                 //takes the info the user passes in
                 final String username = tvUserName.getText().toString();
                 final String password = tvPassword.getText().toString();
-
                 login(username, password);
             }
         });
     }
+
+
     private void login (String username, String password) {
         //check if correct then login
         ParseUser.logInInBackground(username, password, new LogInCallback() {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (e == null) {
                     Log.d("LoginActivity", "Login success!");
-                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
