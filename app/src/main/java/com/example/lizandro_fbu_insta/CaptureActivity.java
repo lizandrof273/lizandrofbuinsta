@@ -1,4 +1,5 @@
 package com.example.lizandro_fbu_insta;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,12 +15,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.lizandro_fbu_insta.model.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
 import java.io.File;
 import java.util.List;
 
@@ -64,6 +68,7 @@ public class CaptureActivity extends Activity {
             }
         });
     }
+
 
     private void launchCamera() {
         // create Intent to take a picture and return control to the calling application
@@ -112,22 +117,30 @@ public class CaptureActivity extends Activity {
         return file;
     }
 
-    private void savePost(String description, ParseUser parseUser, File photoFile) {
-        Post post = new Post();
-        post.setDescription(description);
-        post.setUser(parseUser);
-        post.setImage(new ParseFile(photoFile));
-        post.saveInBackground(new SaveCallback() {
+    private void savePost(final String description, final ParseUser parseUser, File photoFile) {
+        final ParseFile photo = new ParseFile(photoFile);
+        photo.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if (e != null) {
-                    Log.d(tag,"Error while saving");
-                    e.printStackTrace();
-                    return;
+                if (e == null) {
+                    Post post = new Post();
+                    post.setDescription(description);
+                    post.setUser(parseUser);
+                    post.setImage(photo);
+                    post.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e != null) {
+                                Log.d(tag,"Error while saving");
+                                e.printStackTrace();
+                                return;
+                            }
+                            Log.d(tag, "Success!");
+                            mEtDescription.setText("");
+                            mIvPostImage.setImageResource(0);
+                        }
+                    });
                 }
-                Log.d(tag, "Success!");
-                mEtDescription.setText("");
-                mIvPostImage.setImageResource(0);
             }
         });
     }
