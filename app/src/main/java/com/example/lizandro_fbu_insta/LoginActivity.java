@@ -74,10 +74,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void signUp (String username, String password) {
         ParseUser user = new ParseUser();
-// Set core properties
+    // Set core properties
         user.setUsername(username);
         user.setPassword(password);
-// Invoke signUpInBackground
+    // Invoke signUpInBackground
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
