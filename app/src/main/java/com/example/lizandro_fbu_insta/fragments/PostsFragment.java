@@ -65,8 +65,9 @@ public class PostsFragment extends Fragment {
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
                 queryPosts();
-                adapter.clear();
-                adapter.addAll(mPosts);
+                mPosts.clear();
+                mPosts.addAll(mPosts);
+                adapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
             }
         });

@@ -1,6 +1,7 @@
 package com.example.lizandro_fbu_insta;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,9 +36,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int postion) {
-        Post post = posts.get(postion);
+        final Post post = posts.get(postion);
         holder.bind(post);
-
+        holder.imageViewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Post selctionPost = post;
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("post", selctionPost);
+                intent.putExtra("user", selctionPost.getUser());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -45,7 +55,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         return posts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView textViewHandle;
         private ImageView imageViewImage;
         private TextView textViewDescription;
@@ -55,6 +65,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             textViewHandle = itemView.findViewById(R.id.textViewHandle);
             imageViewImage = itemView.findViewById(R.id.imageViewImage);
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
+           // itemView.setOnClickListener(this);
         }
         public void bind(Post post) {
             textViewHandle.setText(post.getUser().getUsername());
@@ -64,7 +75,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             }
             textViewDescription.setText(post.getDescription());
         }
-    }
+/**
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Toast.makeText(context, "This is my message "+position, Toast.LENGTH_LONG).show();
+        }
+    }*/
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
@@ -75,4 +92,5 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         posts.addAll(list);
         notifyDataSetChanged();
     }
+}
 }
