@@ -65,14 +65,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             textViewDescription.setText(post.getDescription());
         }
     }
-    /**public void clear() {
-        items.clear();
+    public void clear() {
+        posts.clear();
         notifyDataSetChanged();
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<Tweet> list) {
-        items.addAll(list);
+    public void addAll(List<Post> list) {
+        posts.addAll(list);
         notifyDataSetChanged();
-    } */
+    }
 }
