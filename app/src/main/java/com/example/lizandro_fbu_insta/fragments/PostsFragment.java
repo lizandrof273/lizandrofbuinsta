@@ -29,7 +29,7 @@ import java.util.List;
 //.public class PostsFragment
 
 public class PostsFragment extends Fragment {
-    private RecyclerView rvPosts;
+    private RecyclerView mRecyclerViewPosts;
     public static final String tag = "PostsFragment";
     protected PostsAdapter adapter;
     protected List<Post> mPosts;
@@ -45,13 +45,13 @@ public class PostsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        rvPosts = view.findViewById(R.id.rvPosts);
+        mRecyclerViewPosts = view.findViewById(R.id.rvPosts);
         mPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), mPosts);
         //make adapter
         //data source
-        rvPosts.setAdapter(adapter);
-        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerViewPosts.setAdapter(adapter);
+        mRecyclerViewPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
         super.onCreate(savedInstanceState);
         // Only ever call `setContentView` once right at the top

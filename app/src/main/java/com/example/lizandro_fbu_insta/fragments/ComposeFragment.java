@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.lizandro_fbu_insta.R;
 import com.example.lizandro_fbu_insta.model.Post;
 import com.parse.ParseException;
@@ -41,8 +40,7 @@ public class ComposeFragment extends Fragment {
     public String mPhotoFileName = "photo.jpg";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     private File mPhotoFile;
-    private BottomNavigationView bottomNavigationView;
-
+    private BottomNavigationView mBottomNavigationView;
 
     @Nullable
     @Override
@@ -56,7 +54,6 @@ public class ComposeFragment extends Fragment {
         mBtnCaptureImage = view.findViewById(R.id.btnTakePic);
         mIvPostImage = view.findViewById(R.id.ivUserPic);
         mBtnSubmit = view.findViewById(R.id.btnSubmit);
-
         mBtnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,10 +71,10 @@ public class ComposeFragment extends Fragment {
                     return;
                 }
                 savePost(description, user, mPhotoFile);
-
             }
         });
     }
+
     private void launchCamera() {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

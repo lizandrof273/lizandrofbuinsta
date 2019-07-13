@@ -15,10 +15,11 @@ import com.parse.SignUpCallback;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView tvPassword;
-    private TextView tvUserName;
-    private Button btnLogIn;
-    private Button buttonSignUp;
+    private TextView mTextViewPassword;
+    private TextView mTextViewUserName;
+    private Button mButtonLogIn;
+    private Button mButtonSignUp;
+    private Button mButtonAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +32,31 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         setContentView(R.layout.activity_login);
-        tvUserName = findViewById(R.id.tvUserName);
-        tvPassword = findViewById(R.id.tvPassword);
-        btnLogIn = findViewById(R.id.btnLogIn);
-        buttonSignUp = findViewById(R.id.buttonSignUp);
-        btnLogIn.setOnClickListener(new View.OnClickListener() {
+        mTextViewUserName = findViewById(R.id.tvUserName);
+        mTextViewPassword = findViewById(R.id.tvPassword);
+        mButtonLogIn = findViewById(R.id.btnLogIn);
+        mButtonSignUp = findViewById(R.id.buttonSignUp);
+        mButtonAbout = findViewById(R.id.buttonAbout);
+        mButtonAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aboutPage();
+            }
+        });
+        mButtonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //takes the info the user passes in
-                final String username = tvUserName.getText().toString();
-                final String password = tvPassword.getText().toString();
+                final String username = mTextViewUserName.getText().toString();
+                final String password = mTextViewPassword.getText().toString();
                 login(username, password);
             }
         });
-        buttonSignUp.setOnClickListener(new View.OnClickListener() {
+        mButtonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String username = tvUserName.getText().toString();
-                final String password = tvPassword.getText().toString();
+                final String username = mTextViewUserName.getText().toString();
+                final String password = mTextViewPassword.getText().toString();
                 signUp(username, password);
             }
         });
@@ -81,12 +89,17 @@ public class LoginActivity extends AppCompatActivity {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    // Hooray! Let them use the app now.
+                    Log.d("LoginActivity", "Login success!");
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+                    Log.e("SignUPActivity", "failure." );
+                    e.printStackTrace();
                 }
             }
         });
+    }
+
+    public void aboutPage () {
+        final Intent intent = new Intent(this, aboutActivity.class);
+        startActivity(intent);
     }
 }

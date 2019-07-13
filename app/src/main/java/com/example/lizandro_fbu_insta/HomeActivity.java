@@ -14,16 +14,17 @@ import com.example.lizandro_fbu_insta.fragments.PostsFragment;
 import com.example.lizandro_fbu_insta.fragments.ProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
-    Fragment fragment;
+
+    private BottomNavigationView mBottomNavigationView;
+    public Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         final FragmentManager fragmentManager = getSupportFragmentManager();
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNavigationView = findViewById(R.id.bottom_navigation);
+        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -47,6 +48,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         // Set default selection
-        bottomNavigationView.setSelectedItemId(R.id.action_home);
+        mBottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 }

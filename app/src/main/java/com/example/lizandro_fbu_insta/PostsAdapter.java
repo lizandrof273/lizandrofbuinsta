@@ -75,13 +75,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             }
             textViewDescription.setText(post.getDescription());
         }
-/**
-        @Override
-        public void onClick(View v) {
-            int position = getAdapterPosition();
-            Toast.makeText(context, "This is my message "+position, Toast.LENGTH_LONG).show();
-        }
-    }*/
+
     public void clear() {
         posts.clear();
         notifyDataSetChanged();

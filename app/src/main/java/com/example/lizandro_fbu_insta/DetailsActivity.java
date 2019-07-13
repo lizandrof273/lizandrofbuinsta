@@ -14,32 +14,32 @@ import com.parse.ParseUser;
 import java.io.File;
 
 public class DetailsActivity extends AppCompatActivity {
-    public ImageView imageViewPhoto;
-    public TextView textViewDescription;
-    public TextView textViewUsername;
-    public TextView textViewTimeStamp;
+    public ImageView mImageViewPhoto;
+    public TextView mTextViewDescription;
+    public TextView mTextViewUsername;
+    public TextView mTextViewTimeStamp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        imageViewPhoto = findViewById(R.id.imageView);
-        textViewDescription = findViewById(R.id.textViewDescription);
-        textViewUsername = findViewById(R.id.textViewUserName);
-        textViewTimeStamp = findViewById(R.id.textViewTimeStamp);
+        mImageViewPhoto = findViewById(R.id.imageView);
+        mTextViewDescription = findViewById(R.id.textViewDescription);
+        mTextViewUsername = findViewById(R.id.textViewUserName);
+        mTextViewTimeStamp = findViewById(R.id.textViewTimeStamp);
 
         Post detailpost = getIntent().getParcelableExtra("post");
         ParseUser detailUser = getIntent().getParcelableExtra("user");
 
-        textViewDescription.setText(detailpost.getDescription());
-        textViewUsername.setText(detailUser.getUsername());
-        textViewTimeStamp.setText(detailpost.getCreatedAt().toString());
+        mTextViewDescription.setText(detailpost.getDescription());
+        mTextViewUsername.setText(detailUser.getUsername());
+        mTextViewTimeStamp.setText(detailpost.getCreatedAt().toString());
         detailpost.getParseFile(Post.KEY_IMAGE).getFileInBackground(new GetFileCallback() {
             @Override
             public void done(File file, ParseException e) {
                 if (e == null) {
                     Glide.with(getApplicationContext()).load(file)
-                            .into(imageViewPhoto);
+                            .into(mImageViewPhoto);
                 }
             }
         });
