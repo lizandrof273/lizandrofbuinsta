@@ -14,7 +14,7 @@ import com.parse.ParseUser;
 import java.io.File;
 
 public class DetailsActivity extends AppCompatActivity {
-    public ImageView imageViewImage;
+    public ImageView imageViewPhoto;
     public TextView textViewDescription;
     public TextView textViewUsername;
     public TextView textViewTimeStamp;
@@ -23,7 +23,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        imageViewImage = findViewById(R.id.imageView);
+        imageViewPhoto = findViewById(R.id.imageView);
         textViewDescription = findViewById(R.id.textViewDescription);
         textViewUsername = findViewById(R.id.textViewUserName);
         textViewTimeStamp = findViewById(R.id.textViewTimeStamp);
@@ -39,7 +39,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void done(File file, ParseException e) {
                 if (e == null) {
                     Glide.with(getApplicationContext()).load(file)
-                            .into(imageViewImage);
+                            .into(imageViewPhoto);
                 }
             }
         });
